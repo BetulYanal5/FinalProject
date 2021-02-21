@@ -32,11 +32,11 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour == 17)
+            if (DateTime.Now.Hour == 01)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
-            //İş kodları
+           // İş kodları
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductsListed);
         }
 
