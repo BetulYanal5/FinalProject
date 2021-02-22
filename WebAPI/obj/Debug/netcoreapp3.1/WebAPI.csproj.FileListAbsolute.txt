@@ -10,8 +10,6 @@ C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\WebAPI.p
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csprojAssemblyReference.cache
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.AssemblyInfoInputs.cache
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.AssemblyInfo.cs
-C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csproj.CoreCompileInputs.cache
-C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.RazorTargetAssemblyInfo.cache
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.Manifest.cache
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.xml
@@ -66,3 +64,10 @@ C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Core.pdb
 C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\DataAccess.pdb
 C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csproj.CopyComplete
+C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Autofac.Extras.DynamicProxy.dll
+C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
+C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csproj.CoreCompileInputs.cache
+C:\Users\Betul\source\repos\FinalProject\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Betul\source\repos\FinalProject\WebAPI\bin\Debug\netcoreapp3.1\FluentValidation.dll
