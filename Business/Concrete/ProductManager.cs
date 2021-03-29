@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -19,55 +20,51 @@ namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
-        IProductDal _productDal;//İş kodları newlenmez
+        IProductDal _productDal;
         ICategoryService _categoryService;
-        public ProductManager(IProductDal productDal,ICategoryService categoryService)//Injektion
+
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
-           
             _productDal = productDal;
             _categoryService = categoryService;
-
         }
 
+        //Claim
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
 
-            IResult result=BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
+            //Aynı isimde ürün eklenemez
+            //Eğer mevcut kategori sayısı 15'i geçtiyse sisteme yeni ürün eklenemez. ve 
+            IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
                 CheckIfProductCountOfCategoryCorrect(product.CategoryId), CheckIfCategoryLimitExceded());
+
             if (result != null)
             {
                 return result;
             }
 
-            if(CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success);
-            {
-                if (CheckIfProductNameExists(product.ProductName).Success) 
-                {
-                    _productDal.Add(product);
-                    return new SuccessResult(Messages.ProductAdded);
-                }
-                //business codes
-                //validation
-            }
+            _productDal.Add(product);
 
-            return new ErrorResult();
+            return new SuccessResult(Messages.ProductAdded);
+
         }
 
 
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour == 01)
+            if (DateTime.Now.Hour == 1)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
-            // İş kodları
+
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
         }
 
-        public IDataResult<List<Product>> GetAllByCategoryId(int Id)
+        public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == Id));
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
         public IDataResult<Product> GetById(int productId)
@@ -82,8 +79,13 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
+            if (DateTime.Now.Hour == 23)
+            {
+                return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintenanceTime);
+            }
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
+
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
@@ -92,9 +94,9 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.ProductCountOfCategoryError);
             }
-            _productDal.Update(product);
-            return new SuccessResult(Messages.ProductAdded);
+            throw new NotImplementedException();
         }
+
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
             //Select count(*) from products where categoryId=1
@@ -105,6 +107,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
         private IResult CheckIfProductNameExists(string productName)
         {
             var result = _productDal.GetAll(p => p.ProductName == productName).Any();
@@ -114,6 +117,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
         private IResult CheckIfCategoryLimitExceded()
         {
             var result = _categoryService.GetAll();
@@ -121,7 +125,9 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CategoryLimitExceded);
             }
+
             return new SuccessResult();
         }
+
     }
 }
